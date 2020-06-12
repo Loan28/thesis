@@ -1,4 +1,4 @@
-package com.chainML.service;
+package com.chainvideoandroid;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

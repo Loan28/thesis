@@ -1,4 +1,4 @@
-package com.chainML.service;
+package com.chainvideoandroid;
 
 public class ImageMetada {
     private String type;

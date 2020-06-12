@@ -1,6 +1,9 @@
-package com.chainML.service;
+package com.chainvideoandroid;
+import android.content.Intent;
+
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.netty.NettyServerBuilder;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -14,13 +17,13 @@ public class chainServer {
 
 
     public chainServer(int port, ImageStore imageStore) {
-        this(ServerBuilder.forPort(port), port, imageStore);
+        this(NettyServerBuilder.forPort(port), port, imageStore);
     }
 
     public chainServer(ServerBuilder serverBuilder, int port, ImageStore imageStore){
         this.port = port;
-        chainMLService Service = new chainMLService(imageStore);
-        server = serverBuilder.addService(Service).build();
+        chainMLService Services = new chainMLService(imageStore);
+        server = serverBuilder.addService(Services).build();
     }
 
     public void start() throws IOException{
@@ -46,16 +49,19 @@ public class chainServer {
         }
     }
 
-    private void  blockUntilShutdown() throws InterruptedException {
+    void  blockUntilShutdown() throws InterruptedException {
         if (server != null) {
             server.awaitTermination();
         }
     }
-    public static void main(String[] args) throws InterruptedException, IOException {
+
+
+    public static void main(String args) throws InterruptedException, IOException {
         DiskImageStore imageStore = new DiskImageStore("img");
         chainServer server = new chainServer(50051, imageStore);
         server.start();
-        server.blockUntilShutdown();
+
+        //server.blockUntilShutdown();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.android_run_ml;
+package com.chainvideoandroid;
 
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
@@ -8,7 +8,6 @@ import android.graphics.Color;
 import org.tensorflow.lite.Interpreter;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +25,7 @@ public class Classifier {
     private final Interpreter interpreter;
     private List<String> labelList = new ArrayList<>();;
     private float[][] labelProbArray;
-    private Classifier(Interpreter interpreter) {
+    Classifier(Interpreter interpreter) {
         this.interpreter = interpreter;
     }
     private static final int RESULTS_TO_SHOW = 1;
@@ -44,7 +43,6 @@ public class Classifier {
         Interpreter interpreter = new Interpreter(byteBuffer);
         return new Classifier(interpreter);
     }
-
     private static ByteBuffer loadModelFile(AssetManager assetManager, String modelPath) throws IOException {
         AssetFileDescriptor fileDescriptor = assetManager.openFd(modelPath);
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
