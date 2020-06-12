@@ -102,6 +102,8 @@ public class chainMLService extends chainMLServiceGrpc.chainMLServiceImplBase {
 
                 try {
                     imageID = imageStore.Save(imageType, imageData);
+                    Processing process = new Processing();
+                    process.ProcessImage(imageID);
                 } catch (IOException e) {
                     responseObserver.onError(
                             Status.INTERNAL
@@ -116,6 +118,7 @@ public class chainMLService extends chainMLServiceGrpc.chainMLServiceImplBase {
                         .build();
                 responseObserver.onNext(response);
                 responseObserver.onCompleted();
+
             }
 
         };

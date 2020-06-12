@@ -188,10 +188,12 @@ public class chainMLClient {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        chainMLClient client = new chainMLClient("0.0.0.0", 50051);
+
+        String Android = "192.168.1.77";
+        chainMLClient client = new chainMLClient(Android, 50051);
 
         try {
-            client.uploadImage("tmp/laptop.jpg");
+            client.uploadImage("tmp/goose.jpg");
            // client.downloadFile("laptop.jpg");
         } finally {
             client.shutdown();
